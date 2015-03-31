@@ -4,7 +4,7 @@
   <groupId>com.samsix</groupId>
   <artifactId>s6-db</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <name>s6db</name>
   <url>http://maven.apache.org</url>
 <build>
@@ -37,7 +37,7 @@
     <dependency>
       <groupId>com.samsix</groupId>
       <artifactId>s6-util</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
