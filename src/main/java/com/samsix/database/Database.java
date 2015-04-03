@@ -86,38 +86,38 @@ public class Database
     {
         _enableLogging = enableLogging;
     }
+    
+    
+    public String formatDbElement(final String    name)
+    {
+        //
+        // If the tablename is not all lowercase AND the database is
+        // postgres then we need to wrap the tablename in double-quotes.
+        //
+        if (PLATFORM_POSTGRES.equals(_info.getPlatform()) && ! name.toLowerCase().equals(name)) {
+            return "\"" + name + "\"";
+        }
+        return name;
+    }
 
 
     public Table getTable( final String    tablename )
     {
-        return new Table( this, tablename );
+        return getTable( null, tablename );
     }
 
 
     public Table getTable( final String    schema,
                            final String    tablename )
     {
-        //
-        // If the tablename is not all lowercase AND the database is
-        // postgres then we need to wrap the tablename in double-quotes.
-        //
-        // Do same with schema?
-        //
-        String tName;
-        if (PLATFORM_POSTGRES.equals(_info.getPlatform()) && ! tablename.toLowerCase().equals(tablename)) {
-            tName = "\"" + tablename + "\"";
-        } else {
-            tName = tablename;
-        }
-        
         String    table;
         if ( schema == null )
         {
-            table = tName;
+            table = formatDbElement(tablename);
         }
         else
         {
-            table = schema + "." + tName;
+            table = formatDbElement(schema) + "." + formatDbElement(tablename);
         }
 
         return new Table( this, table );

@@ -4,7 +4,7 @@
   <groupId>com.samsix</groupId>
   <artifactId>s6-db</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <name>s6db</name>
   <url>http://maven.apache.org</url>
 <build>
