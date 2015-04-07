@@ -4,20 +4,163 @@
   <groupId>com.samsix</groupId>
   <artifactId>s6-db</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.2-SNAPSHOT</version>
-  <name>s6db</name>
-  <url>http://maven.apache.org</url>
-<build>
-  <plugins>
-    <plugin>
-      <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-    </plugin>
-  </plugins>
-</build>
+  <version>1.0.1-SNAPSHOT</version>
+  <name>SAMsix Database Classes</name>
+  <description>SAMsix database classes for working with SQL</description>
+  <url>http://samsix.com</url>
+  
+  
+    <licenses>
+    	<license>
+    		<name>MIT license</name>
+    		<url>http://opensource.org/licenses/MIT</url>
+    		<distribution>repo</distribution>
+    	</license>
+    </licenses>
+    
+	<developers>
+        <developer>
+          <name>Ken Southerland</name>
+          <email>southerland@samsix.com</email>
+          <organization>SAMsix</organization>
+          <organizationUrl>http://www.samsix.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:SamSix/s6-db.git</connection>
+        <developerConnection>scm:git:git@github.com:SamSix/s6-db.git</developerConnection>
+        <url>git@github.com:SamSix/s6-db.git</url>
+      <tag>HEAD</tag>
+  </scm>
+  
+    <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+  
+  <distributionManagement>
+      <snapshotRepository>
+        <id>ossrh</id>
+        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      </snapshotRepository>
+      <repository>
+        <id>ossrh</id>
+        <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      </repository>
+  </distributionManagement>
+
+  <build>
+		<pluginManagement>
+		     <plugins>
+				 <plugin>
+					 <groupId>org.apache.maven.plugins</groupId>
+					 <artifactId>maven-release-plugin</artifactId>
+					 <version>2.5</version>
+					 <configuration>
+						 <useReleaseProfile>false</useReleaseProfile>
+						 <releaseProfiles>release</releaseProfiles>
+						 <goals>deploy</goals>
+					 </configuration>
+				 </plugin>
+		     </plugins>
+		</pluginManagement>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.3</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<!-- see http://jira.codehaus.org/browse/MNG-5346 -->
+					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+				</configuration>
+					<executions>
+					  <execution>
+						<id>mojo-descriptor</id>
+						<goals>
+							<goal>descriptor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+			</plugin>
+		</plugins>
+  </build>
+  
+	<profiles>
+	  <profile>
+	    <id>release</id>
+	    <build>
+	      <plugins>
+  			<plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-source-plugin</artifactId>
+  				<version>2.2.1</version>
+  				<executions>
+  					<execution>
+  						<id>attach-sources</id>
+  						<goals>
+  							<goal>jar-no-fork</goal>
+  						</goals>
+  					</execution>
+  				</executions>
+  			</plugin>
+  			<plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-javadoc-plugin</artifactId>
+  				<version>2.9.1</version>
+  				<executions>
+  					<execution>
+  						<id>attach-javadocs</id>
+  						<goals>
+  							<goal>jar</goal>
+  						</goals>
+  					</execution>
+  				</executions>
+  			</plugin>
+	        <plugin>
+	          <groupId>org.apache.maven.plugins</groupId>
+	          <artifactId>maven-gpg-plugin</artifactId>
+	          <version>1.5</version>
+	          <executions>
+	            <execution>
+	              <id>sign-artifacts</id>
+	              <phase>verify</phase>
+	              <goals>
+	                <goal>sign</goal>
+	              </goals>
+	            </execution>
+	          </executions>
+	        </plugin>
+	      </plugins>
+	    </build>
+	  </profile>
+	</profiles>
+
+
   <dependencies>
     <dependency>
       <groupId>org.postgresql</groupId>
