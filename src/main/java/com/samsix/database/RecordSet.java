@@ -419,6 +419,40 @@ public class RecordSet
     }
 
 
+    public Long getLongObj( final String    colName )
+        throws
+            DatabaseException
+    {
+        try
+        {
+            Long value = _resultSet.getLong( colName );
+
+            return _resultSet.wasNull() ? null : value;
+        }
+        catch( SQLException ex )
+        {
+            throw new RecordSetException().cantReadColumnValue( colName, ex );
+        }
+    }
+
+
+    public Long getLongObj( final int    colNumber )
+        throws
+            DatabaseException
+    {
+        try
+        {
+            Long value = _resultSet.getLong( colNumber );
+
+            return _resultSet.wasNull() ? null : value;
+        }
+        catch( SQLException ex )
+        {
+            throw new RecordSetException().cantReadColumnValue( colNumber, ex );
+        }
+    }
+
+
     public int getInt( final int    colNumber )
         throws
             DatabaseException
