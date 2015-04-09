@@ -26,6 +26,8 @@ import java.util.Vector;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 
 /**
@@ -915,6 +917,26 @@ public class RecordSet
             }
 
             return tmp;
+        }
+        catch ( Throwable    ex )
+        {
+            throw new RecordSetException().cantReadColumnValue( colName, ex );
+        }
+    }
+
+
+    public DateTime getDateTime( final String    colName )
+        throws
+            DatabaseException
+    {
+        try
+        {
+            String datetime = _resultSet.getString( colName );
+            if (datetime == null) {
+                return null;
+            }
+            
+            return DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss Z").parseDateTime(datetime);
         }
         catch ( Throwable    ex )
         {

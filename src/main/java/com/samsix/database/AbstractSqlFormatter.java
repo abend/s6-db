@@ -16,6 +16,8 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.joda.time.DateTime;
+
 import com.samsix.util.string.StringUtilities;
 import com.samsix.util.string.ToStringWrapper;
 
@@ -94,7 +96,6 @@ public abstract class AbstractSqlFormatter
     }
 
 
-
     @Override
     public SqlFormatter append( final String    column,
                                 final Date      when )
@@ -125,7 +126,6 @@ public abstract class AbstractSqlFormatter
     }
 
 
-
     @Override
     public SqlFormatter append( final String      column,
                                 final Calendar    when )
@@ -138,6 +138,18 @@ public abstract class AbstractSqlFormatter
         return append( column, when.getTime() );
     }
 
+
+    @Override
+    public SqlFormatter append( final String    column,
+                                final DateTime  when )
+    {
+        if ( when == null )
+        {
+            return append( column, null, true );
+        }
+
+        return append( column, when.toString(), true );
+    }
 
 
     @Override

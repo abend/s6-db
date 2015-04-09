@@ -14,6 +14,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import org.joda.time.DateTime;
+
 
 
 public interface SqlFormatter
@@ -56,8 +58,13 @@ public interface SqlFormatter
 
     public SqlFormatter append( String    column,
                                 Calendar  when );
+    
+    
+    
+    public SqlFormatter append( final String    column,
+                                final DateTime  when );
 
-
+    
 
     public SqlFormatter append( String    column,
                                 double    value );
