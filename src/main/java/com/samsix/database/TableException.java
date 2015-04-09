@@ -50,14 +50,24 @@ public final class TableException
                                              final String            sql,
                                              final Throwable         ex )
     {
-        init( "Unable to execute sql ["
-              + sql
-              + "] on db ["
-              + info.getDbServerName()
-              + ":"
-              + info.getDatabase()
-              + "]"
-              , ex );
+        String msg;
+        if (info.getDbServerName() == null) {
+            msg = "Unable to execute sql ["
+                  + sql
+                  + "] on db ["
+                  + info.getDbServerName()
+                  + ":"
+                  + info.getDatabase()
+                  + "]"; 
+        } else {
+            msg = "Unable to execute sql ["
+                  + sql
+                  + "] on db ["
+                  + info.getUrl()
+                  + "]"; 
+        }
+        
+        init( msg, ex );
         return this;
     }
 
