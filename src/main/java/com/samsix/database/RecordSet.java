@@ -15,6 +15,7 @@ import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,7 +28,6 @@ import java.util.Vector;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 
 
 /**
@@ -931,12 +931,11 @@ public class RecordSet
     {
         try
         {
-            String datetime = _resultSet.getString( colName );
+            Timestamp datetime = _resultSet.getTimestamp(colName); 
             if (datetime == null) {
                 return null;
             }
-            
-            return DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss Z").parseDateTime(datetime);
+            return new DateTime(datetime);
         }
         catch ( Throwable    ex )
         {
