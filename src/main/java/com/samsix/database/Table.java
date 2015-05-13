@@ -32,15 +32,11 @@ import com.samsix.util.string.StringUtilities;
  *    <p>
  *    Also includes methods to manipulate rows of data in tables.
  *    <code>
- *      Database    db = null;
- *      try
+ *      //
+ *      // Get a database connection.
+ *      //
+ *      try ( Database db = new Database() )
  *      {
- *           //
- *           //    Get a database connection.
- *           //
- *           Database   db         = new Database();
- *
- *
  *           //
  *           //    Get a table object representing the DocLink table.
  *           //
@@ -61,10 +57,6 @@ import com.samsix.util.string.StringUtilities;
  *               isSheet = recordSet.getBoolean( Names.isSheet );
  *               url     = recordSet.getString( Names.url );
  *           }
- *      }
- *      finally
- *      {
- *           Database.release( db );
  *      }
  *
  *    </code>

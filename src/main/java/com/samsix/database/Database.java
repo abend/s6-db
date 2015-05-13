@@ -34,7 +34,7 @@ import com.samsix.util.log.LoggerControl;
  *    <p>
  *    Methods to get connections, tables, and execute queries, etc.
  */
-public class Database
+public class Database implements AutoCloseable
 {
     private static Logger logger = Logger.getLogger( Database.class );
 
@@ -718,6 +718,13 @@ public class Database
         _transactionCount = 0;
     }
 
+    /**
+     * AutoClosable wrapper for release().  Allows automatic resource
+     * management via Java 7's try-with-resources statement.
+     */
+    public void close() {
+        release();
+    }
 
     /**
      *    @return true if this database represents an actual active database connection, false otherwise

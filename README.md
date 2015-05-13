@@ -18,10 +18,10 @@ then you can use
 
       ResourceReader reader = new ResourceReaderImpl("bundles.s6db");
       ConnectionInfo ci = ConnectionInfo.valueOf(reader, "Primary");
-      Database db = new Database(ci);
+      
         
-      Table table = db.getTable(<tablename>);
-      try {
+      try (Database db = new Database(ci)) {
+          Table table = db.getTable(<tablename>);
           RecordSet rs = table.getRecordSet(<whereclause>);
           
           while (rs.next()) {
@@ -29,9 +29,6 @@ then you can use
           }
       } catch (DatabaseException ex) {
           ex.printStackTrace();
-      } finally {
-          // Must *always* release the database connection
-          db.release();
       }
 
 
